@@ -1,12 +1,14 @@
 "=============================================================================
-" File: gist.vim
-" Author: Trae Robrock <trobrock@gmail.com>, Aaron McGeever
-" <aaron@outright.com.
-" Last Change: 16-Jan-2011.
-" Version: 0.1
+" File: evernote.vim
+" Author: Trae Robrock <trobrock@gmail.com>, Aaron McGeever <aaron@outright.com>
+" Modified: Henry Poydar <henry@poydar.com>
 " WebPage: http://github.com/trobrock/evernote-vim
 " License: MIT
 "
+" Notes:
+" * Requirement to controller.rb had to hardcoded, since all relative paths
+" use current buffer, no time to investigate further
+
 if !exists('g:evernote_vim_username')
   let g:evernote_vim_username = ''
 endif
@@ -23,9 +25,9 @@ function! s:ListNotebooks()
 endfunction
 
 ruby << EOF
-    require "evernote-vim/controller.rb"
-
-    $evernote = EvernoteVim::Controller.new
+  require "~/dotfiles/vim/plugin/ruby/evernote-vim/controller.rb"
+  $evernote = EvernoteVim::Controller.new
 EOF
 
 map <Leader>ev :call <SID>ListNotebooks()<CR>
+

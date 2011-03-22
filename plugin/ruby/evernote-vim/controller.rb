@@ -1,4 +1,9 @@
 require "digest/md5"
+
+dir = File.expand_path(File.dirname(__FILE__))
+$LOAD_PATH.push("#{dir}/../../ruby")
+$LOAD_PATH.push("#{dir}/../Evernote/EDAM")
+
 require "thrift/types"
 require "thrift/struct"
 require "thrift/protocol/base_protocol"
@@ -124,7 +129,7 @@ module EvernoteVim
       notebook = line.gsub(/^(\* )/, '').gsub(/\(default\)$/, '')
       notebook = @notebooks.detect { |n| n.name == notebook }
       filter = Evernote::EDAM::NoteStore::NoteFilter.new
-      filter.notebookGuid = notebook.guid
+      #filter.notebookGuid = notebook.guid
 
       @noteList = @noteStore.findNotes(@authToken, filter, 0, Evernote::EDAM::Limits::EDAM_USER_NOTES_MAX)
 
@@ -175,3 +180,4 @@ module EvernoteVim
     end
   end
 end
+
